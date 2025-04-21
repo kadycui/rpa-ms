@@ -1,0 +1,52 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+
+# FastAPI-specific
+.env
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# pipenv
+Pipfile.lock
+
+# conda
+*.conda
+*.env
+
+# Virtualenv
+venv/
+env/
+env.bak/
+venv.bak/
+
+# Migrations folder (if using Alembic)
+alembic/
+migrations/
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# pytest
+.cache/
+
+# mypy
+.mypy_cache/
+
+# Pytest coverage reports
+.coverage
+*.cover
+*.hypothesis/
+
+# FastAPI logs and cache
+logs/
+*.log
