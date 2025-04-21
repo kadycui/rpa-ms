@@ -1,6 +1,6 @@
 import os
 from common.logger import logger
-from common import register_docs
+from common import register_docs, register_static_file
 from common.database import register_db
 from fastapi import FastAPI
 from conf.config import settings
@@ -15,7 +15,8 @@ app = FastAPI(
     redoc_url=None
 
 )
-
+# 初始化静态文件
+register_static_file(app)
 
 # 使用本地docs静态文件
 register_docs(app)

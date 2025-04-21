@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     PROJECT_PATH: pathlib.Path = pathlib.Path(__file__).parent.parent
     LOG_PATH: pathlib.Path = PROJECT_PATH / "logs"  # 日志路径
 
+    # 静态文件
+    STATIC_FILE: bool = True
+    STATIC_PATH: pathlib.Path = PROJECT_PATH / "static"
+
     # MySQL配置
     DB_ENGINE: str = "mysql"
     DB_ECHO: bool = True  # 是否显示SQL语句
@@ -28,7 +32,7 @@ class Settings(BaseSettings):
     DB_ADD_EXCEPTION_HANDLERS: bool = True  # 是否添加异常处理器
 
     # ORM
-    GENERATE_SCHEMAS: bool = True  # 是否生成数据库架构, 生产环境关闭
+    GENERATE_SCHEMAS: bool = False  # 是否生成数据库架构, 生产环境关闭
     
     # Redis配置
     REDIS_HOST: str = "172.19.188.206"
