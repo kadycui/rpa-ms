@@ -5,8 +5,6 @@ from tortoise import Tortoise
 from conf.config import settings
 
 
-
-
 db_config = {
     'connections': {
         'default': {

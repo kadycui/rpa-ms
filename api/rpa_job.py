@@ -7,7 +7,7 @@ from typing import Optional, List
 router = APIRouter()
 
 
-@router.get("/rpa_job/", response_model=List[JobRecordsOut_Pydantic])
+@router.get("/rpa_job/", response_model=List[JobRecordsOut_Pydantic], summary="获取RPA任务记录")
 async def get_rpa_jobs(
     app_name: Optional[str] = Query(None),
     result_status: Optional[str] = Query(None),
@@ -23,3 +23,13 @@ async def get_rpa_jobs(
         raise HTTPException(status_code=404, detail="未找到符合条件的任务记录")
 
     return job_objs
+
+
+class ResponseJobId_Pydantic(JobRecordsOut_Pydantic):
+    id: int
+
+
+@router.post("/rpa_job/", summary="创建RPA任务记录")
+async def create_rpa_job(job: JobRecordsIn_Pydantic): # type: ignore
+    job_obj = await JobRecords.create(**job.dict())
+    return {"id": job_obj.id}

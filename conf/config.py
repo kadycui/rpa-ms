@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     DB_ADD_EXCEPTION_HANDLERS: bool = True  # 是否添加异常处理器
 
     # ORM
-    GENERATE_SCHEMAS: bool = False  # 是否生成数据库架构, 生产环境关闭
+    GENERATE_SCHEMAS: bool = False # 是否生成数据库架构, 生产环境关闭
     
     # Redis配置
     REDIS_HOST: str = "172.19.188.206"
@@ -44,14 +44,10 @@ class Settings(BaseSettings):
     CORS_ORIGINS: List[str] = ["*"]  # 允许的跨域请求来源，默认允许所有来源
     
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",)
-
 @lru_cache
 def get_settings():
     """ 缓存配置 """
     return Settings()
 
 
-settings = get_settings()
+settings = Settings()
