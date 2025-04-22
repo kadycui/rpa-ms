@@ -10,10 +10,13 @@ router = APIRouter()
 
 @router.get("/rpa_job/", response_model=ResponseList[JobRecordsOut_Pydantic], summary="获取RPA任务记录")
 async def get_rpa_jobs(
+    id: Optional[int] = Query(None),
     app_name: Optional[str] = Query(None),
     result_status: Optional[str] = Query(None),
 ):
     query = JobRecords.all()
+    if id:
+        query = query.filter(id=id)
     if app_name:
         query = query.filter(app_name=app_name)
     if result_status:
@@ -36,13 +39,13 @@ async def get_rpa_jobs(
 
 
 @router.post("/rpa_job/", response_model=ResponseId, summary="创建RPA任务记录")
-async def create_rpa_job(job: JobRecordsIn_Pydantic):
+async def create_rpa_job(job: JobRecordsIn_Pydantic): # type: ignore
     job_obj = await JobRecords.create(**job.dict())
     return ResponseId(id=job_obj.id)
 
 
 @router.put("/rpa_job/{job_id}", response_model=ResponseBase[JobRecordsOut_Pydantic], summary="修改RPA任务记录")
-async def update_rpa_job(job_id: int, job: JobRecordsIn_Pydantic):
+async def update_rpa_job(job_id: int, job: JobRecordsIn_Pydantic): # type: ignore
     # 检查任务是否存在
     job_obj = await JobRecords.get_or_none(id=job_id)
     if not job_obj:
