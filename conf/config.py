@@ -23,10 +23,10 @@ class Settings(BaseSettings):
     # MySQL配置
     DB_ENGINE: str = "mysql"
     DB_ECHO: bool = True  # 是否显示SQL语句
-    DB_HOST: str = "172.19.188.206"
+    DB_HOST: str = "192.168.24.132"
     DB_PORT: int = 3306
     DB_USER: str = "root"
-    DB_PASSWORD: str = "123456"
+    DB_PASSWORD: str = "db@24132"
     DB_DATABASE: str = "fd_plateform"
     DB_ENCODING: str = 'utf8mb4'
     DB_ADD_EXCEPTION_HANDLERS: bool = True  # 是否添加异常处理器
