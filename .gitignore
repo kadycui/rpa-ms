@@ -32,9 +32,6 @@ venv.bak/
 alembic/
 migrations/
 
-# Docker
-docker-compose.yml
-Dockerfile
 
 # pytest
 .cache/
