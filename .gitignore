@@ -18,9 +18,6 @@ __pycache__/
 # pipenv
 Pipfile.lock
 
-# conda
-*.conda
-*.env
 
 # Virtualenv
 venv/

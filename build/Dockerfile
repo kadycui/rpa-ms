@@ -1,5 +1,11 @@
 FROM registry.cn-guangzhou.aliyuncs.com/kadycui/python:3.10-slim
 
+# 安装 tzdata 和设置时区
+RUN apt-get update && \
+    apt-get install -y tzdata && \
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata
+
 WORKDIR /app
 
 COPY build/requirements.txt .

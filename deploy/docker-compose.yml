@@ -12,9 +12,25 @@ services:
       - MYSQL_PORT=${MYSQL_PORT:-3306}
     volumes:
       - ../logs:/app/logs
+    depends_on:
+      - db
     networks:
       - rpa-network
 
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-rpadb}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:-rootpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
 networks:
   rpa-network:
-    driver: bridge 
+    driver: bridge
