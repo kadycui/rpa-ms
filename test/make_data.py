@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 
 
 DB_CONFIG = {
-    "host": "172.19.188.206",
+    "host": "172.18.67.16",
     "user": "root",
     "password": "123456",
-    "db": "fd_plateform",  
+    "db": "rpadb",  
     "port": 3306,
     "charset": "utf8mb4"
 }
