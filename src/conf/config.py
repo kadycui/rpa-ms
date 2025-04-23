@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     # 基本配置
     DESC: str = "RPA API 服务"
     VERSION: str = "0.1.0"
-    DEBUG: bool = True
+    LOG_LEVEL: str = "DEBUG"
     PORT: int = 5000  # 默认端口
 
     # 项目路径
@@ -21,15 +21,15 @@ class Settings(BaseSettings):
     STATIC_PATH: pathlib.Path = PROJECT_PATH / "static"
 
     # MySQL配置
-    DB_ENGINE: str = "mysql"
-    DB_ECHO: bool = True  # 是否显示SQL语句
-    DB_HOST: str = "192.168.24.132"
-    DB_PORT: int = 3306
-    DB_USER: str = "root"
-    DB_PASSWORD: str = "db@24132"
-    DB_DATABASE: str = "fd_plateform"
-    DB_ENCODING: str = 'utf8mb4'
-    DB_ADD_EXCEPTION_HANDLERS: bool = True  # 是否添加异常处理器
+    MYSQL_ENGINE: str = "mysql"
+    MYSQL_ECHO: bool = True  # 是否显示SQL语句
+    MYSQL_HOST: str = "192.168.24.132"
+    MYSQL_PORT: int = 3306
+    MYSQL_USER: str = "root"
+    MYSQL_PASSWORD: str = "db@24132"
+    MYSQL_DATABASE: str = "fd_plateform"
+    MYSQL_ENCODING: str = 'utf8mb4'
+    MYSQL_ADD_EXCEPTION_HANDLERS: bool = True  # 是否添加异常处理器
 
     # ORM
     GENERATE_SCHEMAS: bool = False # 是否生成数据库架构, 生产环境关闭
@@ -43,6 +43,12 @@ class Settings(BaseSettings):
     # CORS配置
     CORS_ORIGINS: List[str] = ["*"]  # 允许的跨域请求来源，默认允许所有来源
     
+    model_config = SettingsConfigDict(
+        env_file='.env',
+        env_file_encoding='utf-8',
+        case_sensitive=True,
+        extra='ignore'
+    )
 
 @lru_cache
 def get_settings():

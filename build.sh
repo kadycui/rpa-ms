@@ -3,14 +3,22 @@
 set -e
 
 # ========== 配置 ==========
-REGION="cn-hangzhou"
-NAMESPACE="hec-rpa"
-REPO_NAME="rpa-ms"
+REGION="cn-guangzhou"
+NAMESPACE="kadycui"
+REPO_NAME="rpa_api"
 VERSION="v1.0"
 IMAGE_NAME="$NAMESPACE/$REPO_NAME"
 ACR_REGISTRY="registry.$REGION.aliyuncs.com"
 FULL_IMAGE="$ACR_REGISTRY/$IMAGE_NAME"
 CONTAINER_NAME="rpa-ms-container"
+
+# ========== 环境变量配置 ==========
+MYSQL_HOST="172.19.188.206"
+MYSQL_PORT="3306"
+MYSQL_USER="root"
+MYSQL_PASSWORD="123456"
+MYSQL_DATABASE="fd_plateform"
+
 
 # 登录 ACR
 login_acr() {
@@ -22,7 +30,7 @@ login_acr() {
 build_image() {
     echo "📦 构建镜像..."
     docker build -t $IMAGE_NAME:$VERSION .
-    echo "🏷️ 打标签..."
+    echo "🏷️ 打Tag: $FULL_IMAGE:$VERSION"
     docker tag $IMAGE_NAME:$VERSION $FULL_IMAGE:$VERSION
     docker tag $IMAGE_NAME:$VERSION $FULL_IMAGE:latest
 }
@@ -39,7 +47,15 @@ push_image() {
 run_container() {
     echo "🚀 运行容器..."
     docker rm -f $CONTAINER_NAME 2>/dev/null || true
-    docker run -d --name $CONTAINER_NAME -p 8000:8000 $IMAGE_NAME:$VERSION
+    docker run -d --name $CONTAINER_NAME \
+        -p 5000:5000 \
+        -v $(pwd)/logs:/app/logs \
+        -e MYSQL_HOST="$MYSQL_HOST" \
+        -e MYSQL_PORT="$MYSQL_PORT" \
+        -e MYSQL_USER="$MYSQL_USER" \
+        -e MYSQL_PASSWORD="$MYSQL_PASSWORD" \
+        -e MYSQL_DATABASE="$MYSQL_DATABASE" \
+        $IMAGE_NAME:$VERSION
     echo "✅ 容器运行中：$CONTAINER_NAME"
 }
 

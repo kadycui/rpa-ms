@@ -18,7 +18,7 @@ logger.remove()  # 移除默认处理器
 # 添加控制台输出
 logger.add(
     sys.stderr,
-    level="DEBUG",  # 默认使用 DEBUG 级别
+    level=settings.LOG_LEVEL,  # 默认使用 DEBUG 级别
     format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
     colorize=True,
 )
@@ -26,7 +26,7 @@ logger.add(
 # 添加文件输出
 logger.add(
     log_file,
-    level="DEBUG",
+    level=settings.LOG_LEVEL,
     format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
     rotation="00:00",  # 每天零点创建新文件
     retention="30 days",  # 保留30天的日志

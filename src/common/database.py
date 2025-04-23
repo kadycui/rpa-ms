@@ -8,15 +8,15 @@ from conf.config import settings
 db_config = {
     'connections': {
         'default': {
-            'engine': f'tortoise.backends.{settings.DB_ENGINE}',
+            'engine': f'tortoise.backends.{settings.MYSQL_ENGINE}',
             'credentials': {
-                'host': f'{settings.DB_HOST}',
-                'port': f'{settings.DB_PORT}',
-                'user': f'{settings.DB_USER}',
-                'password': f'{settings.DB_PASSWORD}',
-                'database': f'{settings.DB_DATABASE}',
-                'charset': f'{settings.DB_ENCODING}',
-                'echo': f'{settings.DB_ECHO}'
+                'host': f'{settings.MYSQL_HOST}',
+                'port': f'{settings.MYSQL_PORT}',
+                'user': f'{settings.MYSQL_USER}',
+                'password': f'{settings.MYSQL_PASSWORD}',
+                'database': f'{settings.MYSQL_DATABASE}',
+                'charset': f'{settings.MYSQL_ENCODING}',
+                'echo': f'{settings.MYSQL_ECHO}'
             }
         },
     },
@@ -38,5 +38,6 @@ def register_db(app: FastAPI) -> None:
         app,
         config=db_config,
         generate_schemas=settings.GENERATE_SCHEMAS,
-        add_exception_handlers=settings.DB_ADD_EXCEPTION_HANDLERS
+        add_exception_handlers=settings.MYSQL_ADD_EXCEPTION_HANDLERS
     )
+    logger.info(f"数据库连接成功: {settings.MYSQL_HOST}:{settings.MYSQL_PORT}/{settings.MYSQL_DATABASE}")
