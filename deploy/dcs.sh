@@ -14,17 +14,17 @@ fi
 # show info
 function showinfo(){
     # source .env
-    echo "---------- gms $N deploy info ----------"
-    echo "  ver: $V"
-    echo "mysql: ${MYSQL_HOST}:${MYSQL_PORT}/$D"
-    echo "  web: http://${PORT}:${P}1"
+    echo "---------- RPA $NAME deploy info ----------"
+    echo "  ver: $VERSION"
+    echo "mysql: ${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"
+    echo "  web: http://${EXPORT_IP}:${EXPORT_PORT}"
 }
 
 # operation log
 function operation_log(){
     #source .env
     #[ ! -f ${DCS_LOG} ] && touch ${DCS_LOG}   # >> 在没有文件的时候会创建文件
-    echo "[`date +"%F %T"`] `basename $0` $COM D=$D N=$N P=$P V=$V DB_HOST=${DB_HOST} DBUP=$DBUP" >> ${DCS_LOG}
+    echo "[`date +"%F %T"`] `basename $0` $COM N=$NAME PORT=$PORT V=$VERSION DB_HOST=${MYSQL_HOST} DB_PORT=${MYSQL_PORT} DB_DATABASE=${MYSQL_DATABASE}" >> ${DCS_LOG}
 }
 
 # start  restart  ps  down
