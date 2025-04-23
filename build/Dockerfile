@@ -2,11 +2,11 @@ FROM registry.cn-guangzhou.aliyuncs.com/kadycui/python:3.10-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY build/requirements.txt .
 
 RUN pip install --no-cache-dir -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com -r requirements.txt
 
-COPY src/ .
+COPY ../src/ .
 
 EXPOSE 5000
 

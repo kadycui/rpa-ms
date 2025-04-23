@@ -3,10 +3,10 @@
 set -e
 
 # ========== 配置 ==========
+VERSION="v1.1"
 REGION="cn-guangzhou"
 NAMESPACE="kadycui"
 REPO_NAME="rpa_api"
-VERSION="v1.0"
 IMAGE_NAME="$NAMESPACE/$REPO_NAME"
 ACR_REGISTRY="registry.$REGION.aliyuncs.com"
 FULL_IMAGE="$ACR_REGISTRY/$IMAGE_NAME"
@@ -29,7 +29,7 @@ login_acr() {
 # 构建镜像
 build_image() {
     echo "📦 构建镜像..."
-    docker build -t $IMAGE_NAME:$VERSION .
+    docker build -f build/Dockerfile -t $IMAGE_NAME:$VERSION .
     echo "🏷️ 打Tag: $FULL_IMAGE:$VERSION"
     docker tag $IMAGE_NAME:$VERSION $FULL_IMAGE:$VERSION
     docker tag $IMAGE_NAME:$VERSION $FULL_IMAGE:latest
